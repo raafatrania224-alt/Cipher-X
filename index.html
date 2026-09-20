@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Cipher-X</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+<body>
+
+<!--(name-gate)-->
+    <div id="name-gate" class="container">
+        <h1>Cipher-X</h1>
+        <p>Please enter your name to continue</p>
+        <input type="text" id="name-input" placeholder="Your name">
+        <button onclick="startApp()">Start</button>
+    </div>
+
+<!--(main content)-->
+    <div id="main-content" class="container" style="display:none;">
+
+<!--(navigation bar)-->
+        <nav style="border-bottom: 2px solid #3b0a45; padding-bottom: 10px; margin-bottom: 10px; text-align: center; font-size: 0.85em; white-space: nowrap;">
+            <span onclick="showTab('about')" style="cursor:pointer; font-weight:bold; color:#3b0a45;">About</span>
+            &nbsp;|&nbsp;
+            <span onclick="goMain()" style="cursor:pointer; font-weight:bold; color:#3b0a45;">Main</span>
+            &nbsp;|&nbsp;
+            <span onclick="showTab('feedback')" style="cursor:pointer; font-weight:bold; color:#3b0a45;">Feedback</span>
+        </nav>
+
+<!--(main home)-->
+        <section id ="mainHome">
+            <h1 id="main-title">Cipher-X</h1>
+            <p>Encrypt and Decrypt text using the Caesar cipher and the Vigenère cipher, along with a tool to try out all possible shifts.</p>
+            <p>The input text must consist of English characters. </p>
+            <button class="menu-btn" onclick="showTab('encrypt')">Encrypt</button>
+            <button class="menu-btn" onclick="showTab('decrypt')">Decrypt</button>
+            <button class="menu-btn" onclick="showTab('breakCipher')">Cryptanalysis</button>
+        </section>
+
+<!--(encryption section)-->
+        <section id="encrypt" class="panel">
+            <h2>Text Encryption</h2>
+            <label>Original text</label>
+            <textarea id="enc-text" placeholder="Enter your text"></textarea>
+
+            <label>Cipher Type</label>
+            <select id="enc-algo" onchange="toggleEncKeyField()">
+                <option value="caesar">Caesar Cipher</option>
+                <option value="vigenere">Vigenère Cipher</option>
+            </select>
+
+            <div id="enc-key-number">
+               <label>Key Number</label>
+               <input type="text" id="enc-key-number" placeholder="Enter your key Number">
+            </div>
+
+            <div id="enc-key-word" style="display:none;">
+                <label>Key Word</label>
+                <input type="text" id="enc-key-word" placeholder="Enter your key Word">
+            </div>
+
+            <button onclick="doEncrypt()">Encrypt</button>
+            <div id="enc-output" class="output"></div>
+        </section>
+
+<!--(decryption section)-->
+        <section id="decrypt" class="panel">
+            <h2>Text Decryption</h2>
+            <label>Cipher Text</label>
+            <textarea id="dec-text" placeholder="Enter your cipher text"></textarea>
+
+            <label>Cipher Type</label>
+            <select id="dec-algo">
+                <option value="caesar">Caesar Cipher</option>
+                <option value="vigenere">Vigenère Cipher</option>
+            </select>
+
+            <label>The Key</label>
+            <input type="text" id="dec-key" placeholder="Enter your key">
+
+            <button onclick="doDecrypt()">Decrypt</button>
+            <div id="dec-output" class="output"></div>
+        </section>
+
+<!--(analyzing section)-->
+        <section id="breakCipher" class="panel">
+            <h2>Break Caesar Cipher</h2>
+            <label>Ciphertext</label>
+            <textarea id="break-text" placeholder="Enter your Ciphertext"></textarea>
+            <button onclick="doBreak()">Analyze text</button>
+
+            <div id="break-chart" class="output"></div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shift</th>
+                        <th>Decrypted Text</th>
+                    </tr>
+                </thead>
+                <tbody id="break-output">
+                </tbody>
+            </table>
+        </section>
+
+<!--(about section)-->
+        <section id="about" class="panel">
+            <h2>About</h2>
+            <p>Welcome to Cipher-X!</p>
+            <p>Cipher X is built to make classical cryptography accessible and easy to explore. Whether you want to encode secret messages using Caesar or Vigenère ciphers, decode encrypted text, or test out all shift variations using our built-in cryptanalysis feature.</p>
+            <p>Cipher X is here to make encryption simple and smooth for you. If you need any help, we’re always a click away!✨</p>
+
+            <h2>Contact Us</h2>
+            <p>Have a question or need help? Reach out to us anytime.</p>
+            <p>Email: rmw2610527@cipherx.com</p>
+        </section>
+
+<!--(feedback section)-->
+        <section id="feedback" class="panel">
+            <h2>Feedback</h2>
+            <p>We would love to hear your thoughts about Cipher-X.</p>
+            <label>Your Feedback</label>
+            <textarea id="feedback-text" placeholder="Write your feedback here"></textarea>
+            <button onclick="sendFeedBack()">Send</button>
+        </section>
+
+        <footer>☆ Rania-RMW-2026 ☆</footer>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
