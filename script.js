@@ -7,7 +7,7 @@ function startApp(){
         alert("You must enter your name to continue!");
         return;
     }
-    document.querySelector("#main-title").innerHTML= "Welcome to Cipher-x, " + userName + "!";
+    document.querySelector("#main-title").textContent= "Welcome to Cipher-x, " + userName + "!";
     document.querySelector("#name-gate").style.display= "none";
     document.querySelector("#main-content").style.display= "block";
 }
@@ -31,7 +31,7 @@ function showTab(id){
     document.querySelector("#breakCipher").style.display = "none";
     document.querySelector("#about").style.display = "none";
     document.querySelector("#feedback").style.display = "none";
-    document.querySelector("#id").style.display = "block";
+    document.querySelector("#" + id).style.display = "block";
 }
 
 //close all tabs and show mainHome
@@ -48,11 +48,11 @@ function goMain(){
 function toggleEncKeyField(){
     let algo = document.querySelector("#enc-algo").value;
     if(algo === "caesar"){
-        document.querySelector("#enc-key-number").style.display = "block";
-        document.querySelector("#enc-key-word").style.display = "none";
+        document.querySelector("#enc-key-number-box").style.display = "block";
+        document.querySelector("#enc-key-word-box").style.display = "none";
     } else{
-        document.querySelector("#enc-key-number").style.display = "none";
-        document.querySelector("#enc-key-word").style.display = "block";
+        document.querySelector("#enc-key-number-box").style.display = "none";
+        document.querySelector("#enc-key-word-box").style.display = "block";
     }
 }
 
@@ -132,7 +132,11 @@ function doEncrypt(){
             return;
         }
         let shift =Number(key);
-        document.querySelector("#enc-output").innerHTML = caesarShift(text,  shift);
+        if (isNaN(shift)){
+            alert("Key must be a number");
+            return;
+        }
+        document.querySelector("#enc-output").textContent = caesarShift(text,  shift);
     }else{
         let key = document.querySelector("#enc-key-word").value;
         if (key === ""){
@@ -143,7 +147,7 @@ function doEncrypt(){
         if (result === null){
             alert("key must consist English letters");
         }else{
-            document.querySelector("#enc-output").innerHTML = result;
+            document.querySelector("#enc-output").textContent = result;
         }
     }
 }
@@ -162,13 +166,13 @@ function doDecrypt(){
     }
     if (algo === "caesar"){
         let shift = Number(key);
-        document.querySelector("#dec-output").innerHTML = caesarShift(text, 26-shift);
+        document.querySelector("#dec-output").textContent = caesarShift(text, 26-shift);
     }else{
-    let result = vigenereShift(#text, key, false);
+    let result = vigenereShift(text, key, false);
         if (result === null){
             alert("key must consist English letters");
         }else{
-            document.querySelector("#dec-output").innerHTML = result;
+            document.querySelector("#dec-output").textContent = result;
         }
     }
 }
@@ -188,7 +192,7 @@ function doBreak(){
     }
     for (let i=0; i<text.length; i++){
         let char = text[i].toLowerCase();
-        let index = alphabet[char];
+        let index = alphabet.indexOf(char);
         if (index !== -1){
             counts[index] = counts[index] + 1;
         }
